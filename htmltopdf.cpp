@@ -34,9 +34,10 @@ void chooseFile( Fl_Widget* o, void*  ){
   case 1: printf("CANCEL\n"); break; // CANCEL
   default:
     //printf("PICKED: %s\n", fnfc.filename());
-          std::string str1(fnfc.filename());
-          std::string str2(".pdf");
-    tofile->value((str1+str2).c_str());
+    //std::string str1(fnfc.filename());
+    //std::string str2(".pdf");
+    //tofile->value((str1+str2).c_str());
+    tofile->value(fnfc.filename());
     break; // FILE CHOSEN
   }
 }
@@ -56,9 +57,9 @@ void createPDF( Fl_Widget* o, void*  ){
   strcat (str,timeout->value());*/
   std::string quote("\"");
   std::string mainfolder = thisfilepath.substr(0, ((int) thisfilepath.length())-9);
-    std::string str01("phantomjs");
-    std::string space(" ");
-    std::string javascript("createPDF.js");
+  std::string str01("phantomjs");
+  std::string space(" ");
+  std::string javascript("createPDF.js");
   std::string str2( url->value() );
   std::string str3( tofile->value() );
   std::string str4( viewport_w->value() );
@@ -161,11 +162,11 @@ int main(int argc, char **argv) {
   Fl_Box *naslov = new Fl_Box(0,10,sirina_programa,visina_inputa,"Take a pdf snapshot of a webpage:");
   naslov->labelsize(22);
     
-    //char cwd[1024];
-    //getcwd(cwd, sizeof(cwd));
-           //if (getcwd(cwd, sizeof(cwd)) != NULL)
-        //fprintf(stdout, "Current working dir: %s\n", cwd);
-    url = new Fl_Input(sirina_programa-zamik_inputa-sirina_inputa,space_height+visina_inputa,sirina_inputa,visina_inputa, "Url:");
+  //char cwd[1024];
+  //getcwd(cwd, sizeof(cwd));
+  //if (getcwd(cwd, sizeof(cwd)) != NULL)
+  //fprintf(stdout, "Current working dir: %s\n", cwd);
+  url = new Fl_Input(sirina_programa-zamik_inputa-sirina_inputa,space_height+visina_inputa,sirina_inputa,visina_inputa, "Url:");
   Fl_Box *url_d = new Fl_Box(0,space_height+visina_inputa+visina_inputa,sirina_programa,visina_description,"Usage: https://www.example.com/");
   url_d->labelsize(description_font_size);
   //Fl_Input *urlnaslov = new Fl_Input(0,60,sirina_programa,visina_inputa,"Url:");
