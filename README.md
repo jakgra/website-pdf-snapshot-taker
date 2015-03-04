@@ -1,8 +1,8 @@
 # website-pdf-snapshot-taker
-A small gui interface to a phantomjs script (uses a modified phantomjs build(so the media query print is not set))
+A small gui interface to a phantomjs script (uses a modified phantomjs build(so the media query print is not set and you get the original look of the website and not the one for printing))
 
 
-# how to build :
+#How to build :
 
 ##First (on all supported OS):
 Open a terminal and execute:
@@ -13,20 +13,20 @@ cd website-pdf-snapshot-taker
 As an alternative you can download and extract the zip file.
 
 ##Then:
-###on debian or ubuntu:
+###on Debian or Ubuntu:
 ```
 sudo apt-get install libfltk1.3-dev
-fltk-config --compile htmltopdf.cpp
+fltk-config --compile htmltopdf.cpp && mv htmltopdf downloads/Linux/htmltopdf/htmltopdf && cp phantomjs downloads/Linux/htmltopdf/phantomjs && cp createPDF.js downloads/Linux/htmltopdf/createPDF.js
 ```
-The compiled program is htmltopdf, for it to run correctly it must be located in the same folder as createPDF and phantomjs.
+The compiled program is htmltopdf in the downloads/Linux/htmltopdf folder, for it to run correctly it must be located in the same folder as createPDF and phantomjs. On other linux distributions (fedora…) the process is the same except you have to install fltk1.3 in another way.
 
 ###on OSX:
-install xcode
+install xcode,
 install fltk1.3 (instructions on their website)
 ```
-fltk-config --compile htmltopdf.cpp && cp OSX/phantomjs htmltopdf.app/Contents/MacOS/phantomjs && cp createPDF.js htmltopdf.app/Contents/MacOS/createPDF.js
+fltk-config --compile htmltopdf.cpp && cp OSX/phantomjs htmltopdf.app/Contents/MacOS/phantomjs && cp createPDF.js htmltopdf.app/Contents/MacOS/createPDF.js && mv htmltopdf.app downloads/OSX/htmltopdf.app
 ```
-You get the folder(application) htmltopdf.app which you can directly use, copy, move from/to anywhere. 
+You get the folder(application) htmltopdf.app in downloads/OSX which you can directly use, copy, move from/to anywhere. 
 
 ###on windows:
 TODO
