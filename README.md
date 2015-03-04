@@ -9,6 +9,7 @@ fltk-config --compile htmltopdf.cpp
 
 the phantomjs binary is compiled from the official source code, following their official guide. The only difference is that you have to comment out line 1501 in phantomjs/src/qt/qtwebkit/Source/WebCore/page/FrameView.cpp ( setMediaType("print"); ). Here is the surrounding code:
 
+```
 void FrameView::adjustMediaTypeForPrinting(bool printing)
 {
     if (printing) {
@@ -21,3 +22,5 @@ void FrameView::adjustMediaTypeForPrinting(bool printing)
         m_mediaTypeWhenNotPrinting = String();
     }
 }
+```
+
