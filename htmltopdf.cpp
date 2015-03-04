@@ -16,7 +16,8 @@ Fl_Input *url;
 Fl_Input *viewport_h;
 Fl_Input *viewport_w;
 Fl_Input *timeout;
-
+int const maxPathSize=200;
+char filename[maxPathSize];
 
 
 
@@ -63,7 +64,7 @@ void createPDF( Fl_Widget* o, void*  ){
   //printf( "%s", command.c_str()  );
   int success=system( command.c_str() );
   if(success==0){
-    char filename[] = "defaults";
+    //char filename[] = "defaults";
 
 
     FILE *file = fopen(filename, "w");
@@ -79,7 +80,7 @@ void createPDF( Fl_Widget* o, void*  ){
 
 void setDefaults(){
   // the file we want to read from
-  char filename[] = "defaults";
+  //char filename[] = "defaults";
 
 
     std::ifstream ifs;
@@ -110,11 +111,16 @@ ifs.open (filename);
     }
     ifs.close();
   }else{
+    //char defaultoutputpdf[maxPathSize];
+    //strcat( defaultoutputpdf, getenv("HOME"));
+    //strcat( defaultoutputpdf, "/output.pdf");
+    std::string str1(getenv("HOME"));
+    std::string str2("/output.pdf");
     url->value("http://example.com/");
     viewport_w->value("1920");
     viewport_h->value("1080");
     timeout->value("300");
-    tofile->value("output.pdf");
+    tofile->value( (str1+str2).c_str() );
   }
 
 }
@@ -124,6 +130,14 @@ ifs.open (filename);
 
 
 int main(int argc, char **argv) {
+  strcat(filename, getenv("HOME"));
+  strcat(filename, "/.wpst-defaults");
+  //printf("ROOT : %s\n", filename);
+
+ //delete[] path;
+
+
+
   static int sirina_programa=500;
   static int visina_programa=700;
   static int sirina_inputa=200;
