@@ -1,10 +1,16 @@
 # website-pdf-snapshot-taker
-A small gui interface to a phantomjs script (uses a modified phantomjs build(so the media query print is not set and you get the original look of the website and not the one for printing))
+A small gui interface to a phantomjs script (uses a modified phantomjs build(so the media query print is not set and you get the original look of the website and not the one for printing)). If you like it, use it and tell your friends (or not :) ). If there is something wrong, or you have a great idea for a new feature leave a comment here or email me.
 
+##How to install and use :
+###on Linux(x64) based OS(Debian, Ubuntu, Fedora...):
+Simply download [this](https://github.com/jakgra/website-pdf-snapshot-taker/blob/master/downloads/Linux/htmltopdf.zip?raw=true). Unzip it. And click on htmltopdf inside the htmltopdf folder.
+###on OSX (Apple):
+Simply download [this](https://github.com/jakgra/website-pdf-snapshot-taker/blob/master/downloads/OSX/htmltopdf.app.zip?raw=true). Unzip it. And click on htmltopdf.app. You can also drag it to your application folder or your dock.
+###on another OS:
+Build it. Instructions are a little lower on this page. If it works do not forget to post the procedure here (or email me).
+##How to build :
 
-#How to build :
-
-##First (on all supported OS):
+###First (on all supported OS):
 Open a terminal and execute:
 ```
 git clone https://github.com/jakgra/website-pdf-snapshot-taker.git
@@ -12,15 +18,15 @@ cd website-pdf-snapshot-taker
 ```
 As an alternative you can download and extract the zip file.
 
-##Then:
-###on Debian or Ubuntu:
+###Then:
+####on Debian or Ubuntu:
 ```
 sudo apt-get install libfltk1.3-dev
 fltk-config --compile htmltopdf.cpp && mv htmltopdf downloads/Linux/htmltopdf/htmltopdf && cp phantomjs downloads/Linux/htmltopdf/phantomjs && cp createPDF.js downloads/Linux/htmltopdf/createPDF.js && cd downloads/Linux && zip -r htmltopdf.zip htmltopdf && cd ../../
 ```
 The compiled program is htmltopdf in the downloads/Linux/htmltopdf folder, for it to run correctly it must be located in the same folder as createPDF and phantomjs. On other linux distributions (fedora…) the process is the same except you have to install fltk1.3 in another way.
 
-###on OSX:
+####on OSX:
 install xcode,
 install fltk1.3 (instructions on their website)
 ```
@@ -28,11 +34,11 @@ fltk-config --compile htmltopdf.cpp && cp OSX/phantomjs htmltopdf.app/Contents/M
 ```
 You get the folder(application) htmltopdf.app in downloads/OSX which you can directly use, copy, move from/to anywhere. 
 
-###on windows:
+####on windows:
 TODO
 
-##If you also wish to compile phantomjs:
-the phantomjs binary is compiled from the official source code(v2.0.1), following their official guide. The only difference is that you have to comment out line 1501 in phantomjs/src/qt/qtwebkit/Source/WebCore/page/FrameView.cpp ( setMediaType("print"); ). Here is the surrounding code:
+###If you also wish to compile phantomjs:
+the phantomjs binary is compiled from the official source code(v2.0.1), following their official guide. The only difference is that you have to comment out line 1501 in phantomjs/src/qt/qtwebkit/Source/WebCore/page/FrameView.cpp ( `setMediaType("print");` ). Here is the surrounding code:
 
 ```
 void FrameView::adjustMediaTypeForPrinting(bool printing)
