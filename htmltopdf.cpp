@@ -16,8 +16,9 @@ Fl_Input *url;
 Fl_Input *viewport_h;
 Fl_Input *viewport_w;
 Fl_Input *timeout;
-int const maxPathSize=200;
+int const maxPathSize=1024;
 char filename[maxPathSize];
+std::string thisfilepath;
 
 
 
@@ -32,8 +33,10 @@ void chooseFile( Fl_Widget* o, void*  ){
   case -1: printf("ERROR: %s\n", fnfc.errmsg()); break; // ERROR
   case 1: printf("CANCEL\n"); break; // CANCEL
   default:
-    printf("PICKED: %s\n", fnfc.filename());
-    tofile->value(fnfc.filename());
+    //printf("PICKED: %s\n", fnfc.filename());
+          std::string str1(fnfc.filename());
+          std::string str2(".pdf");
+    tofile->value((str1+str2).c_str());
     break; // FILE CHOSEN
   }
 }
@@ -51,14 +54,18 @@ void createPDF( Fl_Widget* o, void*  ){
   strcat (str,viewport_h->value());
   strcat (str," ");
   strcat (str,timeout->value());*/
-  std::string str("phantomjs createPDF.js ");
+  std::string quote("\"");
+  std::string mainfolder = thisfilepath.substr(0, ((int) thisfilepath.length())-9);
+    std::string str01("phantomjs");
+    std::string space(" ");
+    std::string javascript("createPDF.js");
   std::string str2( url->value() );
   std::string str3( tofile->value() );
   std::string str4( viewport_w->value() );
   std::string str5( viewport_h->value() );
   std::string str6( timeout->value() );
-  std::string command( str+str2+" \""+str3+"\" "+str4+"x"+str5+" "+str6 );
-
+  std::string command( quote+mainfolder+str01+quote+space+quote+mainfolder+javascript+quote+space+str2+" \""+str3+"\" "+str4+"x"+str5+" "+str6 );
+  //url->value(command.c_str());
   //str = "phantomjs createPDF.js " + (std::string) timeout->value()  + " ";
 
   //printf( "%s", command.c_str()  );
@@ -130,6 +137,7 @@ ifs.open (filename);
 
 
 int main(int argc, char **argv) {
+  thisfilepath = (std::string) argv[0];
   strcat(filename, getenv("HOME"));
   strcat(filename, "/.wpst-defaults");
   //printf("ROOT : %s\n", filename);
@@ -152,7 +160,12 @@ int main(int argc, char **argv) {
   Fl_Group *viewport = new Fl_Group(0,0,sirina_programa,visina_programa);
   Fl_Box *naslov = new Fl_Box(0,10,sirina_programa,visina_inputa,"Take a pdf snapshot of a webpage:");
   naslov->labelsize(22);
-  url = new Fl_Input(sirina_programa-zamik_inputa-sirina_inputa,space_height+visina_inputa,sirina_inputa,visina_inputa,"Url:");
+    
+    //char cwd[1024];
+    //getcwd(cwd, sizeof(cwd));
+           //if (getcwd(cwd, sizeof(cwd)) != NULL)
+        //fprintf(stdout, "Current working dir: %s\n", cwd);
+    url = new Fl_Input(sirina_programa-zamik_inputa-sirina_inputa,space_height+visina_inputa,sirina_inputa,visina_inputa, "Url:");
   Fl_Box *url_d = new Fl_Box(0,space_height+visina_inputa+visina_inputa,sirina_programa,visina_description,"Usage: https://www.example.com/");
   url_d->labelsize(description_font_size);
   //Fl_Input *urlnaslov = new Fl_Input(0,60,sirina_programa,visina_inputa,"Url:");
