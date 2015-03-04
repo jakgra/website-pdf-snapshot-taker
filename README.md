@@ -16,7 +16,7 @@ As an alternative you can download and extract the zip file.
 ###on Debian or Ubuntu:
 ```
 sudo apt-get install libfltk1.3-dev
-fltk-config --compile htmltopdf.cpp && mv htmltopdf downloads/Linux/htmltopdf/htmltopdf && cp phantomjs downloads/Linux/htmltopdf/phantomjs && cp createPDF.js downloads/Linux/htmltopdf/createPDF.js
+fltk-config --compile htmltopdf.cpp && mv htmltopdf downloads/Linux/htmltopdf/htmltopdf && cp phantomjs downloads/Linux/htmltopdf/phantomjs && cp createPDF.js downloads/Linux/htmltopdf/createPDF.js && cd downloads/Linux && zip -r htmltopdf.zip htmltopdf && cd ../../
 ```
 The compiled program is htmltopdf in the downloads/Linux/htmltopdf folder, for it to run correctly it must be located in the same folder as createPDF and phantomjs. On other linux distributions (fedora…) the process is the same except you have to install fltk1.3 in another way.
 
